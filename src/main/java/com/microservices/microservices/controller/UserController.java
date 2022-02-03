@@ -48,4 +48,10 @@ public class UserController {
 		userService.delete(id);
 		return new ResponseEntity<User>(HttpStatus.OK);
 	} 
+	
+	@GetMapping(value = "/search/{name}")
+	public ResponseEntity<List<User>> findByName(@PathVariable("name") String name){
+		List usersList = userService.findUserByName(name);
+		return new ResponseEntity<List<User>>(usersList, HttpStatus.OK);
+	}
 }
