@@ -28,8 +28,7 @@ public class UserService {
 	}
 	
 	public User getUser(Long id) {
-		return userRepository.findById(id)
-							 .orElseThrow( () -> new UserNotFoundExeception("This user do not exist"));
+		return userRepository.findById(id).orElseThrow( () -> new UserNotFoundExeception( "User not found"));
 	}
 	
 	public List<User> findUserByName(String name){
@@ -43,9 +42,5 @@ public class UserService {
 	public void delete(Long id) {
 		userRepository.deleteById(id);
 	}
-	
-	
-	
-	
 	
 }
