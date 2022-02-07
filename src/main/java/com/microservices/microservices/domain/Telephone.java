@@ -1,6 +1,5 @@
 package com.microservices.microservices.domain;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
