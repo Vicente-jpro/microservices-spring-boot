@@ -38,6 +38,7 @@ public class UserController {
 	@GetMapping( value = "/get/{id}", produces = "application/json")
 	public ResponseEntity<User> getUser(@PathVariable("id") Long id){
 		User user = userService.getUser(id);
+		//System.out.println(user.getTelephones().get(0));
 		return new ResponseEntity<User>( user, HttpStatus.OK);
 	}
 	

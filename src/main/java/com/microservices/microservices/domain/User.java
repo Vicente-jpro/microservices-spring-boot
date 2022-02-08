@@ -36,13 +36,21 @@ public class User implements Serializable{
 	private String email;
 	private String password;
 	
-	@JsonIgnore
-	@OneToMany( mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Telephone> telephones = new ArrayList<Telephone>();
-	
 	@Column(name = "birth_date", columnDefinition = "TIMESTAMP")
 	private LocalDate birthDate;
 
+	@JsonIgnore
+	@OneToMany( mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Telephone> telephones = new ArrayList<Telephone>();
+	
+	public List<Telephone> getTelephones() {
+		return telephones;
+	}
+
+	public void setTelephones(List<Telephone> telephones) {
+		this.telephones = telephones;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -75,14 +83,6 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public List<Telephone> getTelephones() {
-		return telephones;
-	}
-
-	public void setTelephones(List<Telephone> telephones) {
-		this.telephones = telephones;
-	}
-
 	public LocalDate getBirthDate() {
 		return birthDate;
 	}
@@ -90,7 +90,5 @@ public class User implements Serializable{
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
-	
-	
-	
+
 }

@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -29,7 +32,7 @@ public class Telephone {
 	private String number;
 	
 	@ManyToOne
-	@JoinColumn( name = "user_id")
+	@ForeignKey( name = "user_id")
 	private User user;
 
 	public Long getId() {
@@ -55,7 +58,6 @@ public class Telephone {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
 	
 }
