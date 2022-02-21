@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.microservices.microservices.domain.User;
+import com.microservices.microservices.dto.UserDto;
 import com.microservices.microservices.services.UserService;
 
 @RestController
@@ -36,9 +38,9 @@ public class UserController {
 	}
 	
 	@GetMapping( value = "/get/{id}", produces = "application/json")
-	public ResponseEntity<User> getUser(@PathVariable("id") Long id){
-		User user = userService.getUser(id);
-		return new ResponseEntity<User>( user, HttpStatus.OK);
+	public ResponseEntity<UserDto> getUser(@PathVariable("id") Long id){
+		UserDto user = userService.getUser(id);
+		return new ResponseEntity<UserDto>( user, HttpStatus.OK);
 	}
 	
 	@DeleteMapping( value = "/delete/{id}", produces = "application/json")

@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.microservices.microservices.domain.User;
+import com.microservices.microservices.dto.UserDto;
 import com.microservices.microservices.execeptions.UserNotFoundExeception;
 import com.microservices.microservices.repository.UserRepository;
 
@@ -27,8 +29,14 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	public User getUser(Long id) {
-		return userRepository.findById(id).orElseThrow( () -> new UserNotFoundExeception( "User not found"));
+	public UserDto getUser(Long id) {
+		
+		UserDto dto = new UserDto();
+		
+		User user = userRepository.findById(id).orElseThrow( () -> new UserNotFoundExeception( "User not found"));
+		BeanUtils.copyProperties(user, dto);
+		return dto;
+		
 	}
 	
 	public List<User> findUserByName(String name){
