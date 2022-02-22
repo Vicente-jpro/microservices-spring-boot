@@ -28,7 +28,7 @@ public class UserController {
 
 	@GetMapping(value = "/all", produces = "application/json")
 	public ResponseEntity<List<User>> readAll(){
-		List userList = userService.readAll();
+		List<User> userList = userService.readAll();
 		return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
 	}   
 	
@@ -51,7 +51,7 @@ public class UserController {
 	
 	@GetMapping(value = "/search/{name}", produces = "application/json")
 	public ResponseEntity<List<User>> findByName(@PathVariable("name") String name){
-		List usersList = userService.findUserByName(name);
+		List<User> usersList = userService.findUserByName(name);
 		return new ResponseEntity<List<User>>(usersList, HttpStatus.OK);
 	}
 }

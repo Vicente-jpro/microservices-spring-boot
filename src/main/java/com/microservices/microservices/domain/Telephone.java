@@ -3,7 +3,6 @@ package com.microservices.microservices.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +35,7 @@ public class Telephone {
 	private String number;
 	
 	@JsonBackReference
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn( name = "user_id", nullable = false)
 	private User user;
 	
