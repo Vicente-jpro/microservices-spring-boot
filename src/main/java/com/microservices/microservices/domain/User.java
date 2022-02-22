@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,8 +28,6 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "users")
-
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -44,7 +43,7 @@ public class User implements Serializable{
 	private LocalDate birthDate;
 	
 	@JsonManagedReference
-	@OneToMany( mappedBy = "user")
+	@OneToMany( mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Telephone> telephones ;
 	
 
