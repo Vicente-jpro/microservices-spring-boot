@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Hello I'm an index page</h1>
+<button onclick="find_all()">Find all users</button>
+<script type="text/javascript">
+
+
+function find_all() {
+
+		$.ajax({
+			method: "GET",
+			url: "/user/all",
+			contentType: "application/json; charset=utf-8",
+			success: function(response) {
+				// response has all values from this particular user 
+			alert("All user was got succeffuly");
+			}
+		}).fail(function(xhr, status, errorThrown) {
+			alert("Error. It was not possible created:" + xhr.responseText);
+		});
+
+}
+</script>
+</body>
+</html>
