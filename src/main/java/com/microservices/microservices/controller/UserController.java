@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +20,7 @@ import com.microservices.microservices.services.UserService;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController{
 
 	private final UserService userService;
 
@@ -28,12 +30,17 @@ public class UserController {
 
 	@GetMapping(value = "/all", produces = "application/json")
 	public ResponseEntity<List<User>> readAll(){
-		List userList = userService.readAll();
+		List<User> userList = userService.readAll();
 		return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
 	}   
 	
 	@PostMapping( value = "/add", produces = "application/json")
 	public ResponseEntity<User> create(@RequestBody User user){
+		return new ResponseEntity<User>(userService.create(user), HttpStatus.CREATED);
+	}
+	
+	@PutMapping( value = "/add", produces = "application/json")
+	public ResponseEntity<User> update(@RequestBody User user){
 		return new ResponseEntity<User>(userService.create(user), HttpStatus.CREATED);
 	}
 	
@@ -51,7 +58,7 @@ public class UserController {
 	
 	@GetMapping(value = "/search/{name}", produces = "application/json")
 	public ResponseEntity<List<User>> findByName(@PathVariable("name") String name){
-		List usersList = userService.findUserByName(name);
+		List<User> usersList = userService.findUserByName(name);
 		return new ResponseEntity<List<User>>(usersList, HttpStatus.OK);
 	}
 }
