@@ -49,6 +49,7 @@ public class User implements UserDetails{
 	@OneToMany( mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Telephone> telephones ;
 
+	// Type of users access
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
