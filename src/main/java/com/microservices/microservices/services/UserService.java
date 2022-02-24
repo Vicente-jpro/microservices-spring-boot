@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.microservices.microservices.domain.User;
@@ -18,6 +19,7 @@ import com.microservices.microservices.repository.UserRepository;
 @Transactional
 public class UserService {
 
+	private final String USER_NOT_FOUND_MESSAGE = "User not found."; 
 	private final UserRepository userRepository;
 	
 	@Autowired
@@ -33,7 +35,7 @@ public class UserService {
 		
 		UserDto dto = new UserDto();
 		
-		User user = userRepository.findById(id).orElseThrow( () -> new UserNotFoundExeception( "User not found"));
+		User user = userRepository.findById(id).orElseThrow( () -> new UserNotFoundExeception(USER_NOT_FOUND_MESSAGE));
 		BeanUtils.copyProperties(user, dto);
 		return dto;
 		
@@ -49,6 +51,13 @@ public class UserService {
 	
 	public void delete(Long id) {
 		userRepository.deleteById(id);
+	}
+	
+	public User user(String username) {
+		if ( username.equalsIgnoreCase(null) ) {
+			 throw new UsernameNotFoundException(USER_NOT_FOUND_MESSAGE);
+		}
+		return userRepository.findUserByName(username);
 	}
 	
 }

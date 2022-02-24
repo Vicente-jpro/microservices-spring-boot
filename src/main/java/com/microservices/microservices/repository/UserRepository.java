@@ -12,6 +12,9 @@ import com.microservices.microservices.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
+	
 	@Query("select u from User u where u.name like  %?1%")
 	List<User> findUserByNameAndSort(String name, Sort sort);
+	
+	User findUserByName(String name);
 }
